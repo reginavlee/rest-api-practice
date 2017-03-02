@@ -1,40 +1,12 @@
-const express = require('express');
-const router = express.Router();
 const mongoose = require('mongoose');
 const ObjectId = require('mongodb').ObjectID;
-
-// using mongoose to connect to local mongodb
-mongoose.connect('localhost/practice');
-// set connection to variable
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error: '));
-db.once('open', function() {
-  console.log("we're connected!");
-});
-
-//////////////////////////// HOME ////////////////////////////////////
-
-router.route('/')
-  .get((req,res) => {
-    db.collection('school').find().toArray((err, results) => {
-      res
-        .status(200)
-        .send(results)
-    });
-  })
-  .post((req, res) => {
-    console.log('req.body is: ', req.body);
-    db.collection('school').save(req.body, (err, results) => {
-      res
-        .status(200)
-        .send(results)
-    });
-  })
+const Teacher = mongoose.model('Teachers');
 
 //////////////////////////// TEACHERS ////////////////////////////////////
 
 // teachers
+Teacher.find
+
 router.route('/api/teachers')
   .get((req,res) => {
     db.collection('teachers').find().toArray((err, results) => {
@@ -94,7 +66,6 @@ router.route('/api/students')
 // students/:id
 router.route('/api/students/:id')
   .get((req, res) => {
-    console.log(req.params.id);
     db.collection('students').find({"_id": ObjectId("" + req.params.id)}).toArray((err, results) => {
       res
         .status(200)
@@ -149,3 +120,5 @@ router.route('/api/classes/:id')
   })
 
 module.exports = router;
+
+db.close();
