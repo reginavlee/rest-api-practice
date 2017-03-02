@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const teacherSchema = new mongoose.Schema({
-  name : Number,
+  name : String,
   email: String
 });
 
 const studentSchema = new mongoose.Schema({
-  name : Number,
+  name : String,
   email: String
 });
 
