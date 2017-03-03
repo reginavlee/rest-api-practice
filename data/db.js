@@ -22,6 +22,6 @@ process.on('SIGINT', () => {
   }); 
 }); 
 
-// require('./models');
+require('./models');
 
 module.exports = db;

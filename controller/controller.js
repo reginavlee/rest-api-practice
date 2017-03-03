@@ -4,40 +4,52 @@ const mongoose = require('mongoose');
 const ObjectId = require('mongodb').ObjectID;
 const db = require('../data/db');
 
-// const Teacher = mongoose.model('Teachers');
-// const Student = mongoose.model('Students');
-// const Classes = mongoose.model('Classes');
+const model = {
+  teachers: mongoose.model('Teachers'),
+  students: mongoose.model('Students'),
+  classes: mongoose.model('Classes')
+}
 
 //////////////////////////// /api/:type ////////////////////////////////////
 
 router.route('/api/:type')
-  .get((req,res) => {
-    db.collection(req.params.type).find().toArray((err, results) => {
-      res
-        .status(200)
-        .send(results)
-    });
-  })
   .post((req, res) => {
-    db.collection(req.params.type).save(req.body, (err, results) => {
-      res
-        .status(200)
-        .send(results)
-    });
+    let type = model[req.params.type];
+    let temp = new type(req.body);
+    temp.save((err, result)=> {
+      if (err) {
+        console.log(err);
+        res.status(404);
+        res.send(err);
+      } else {
+        res.status(201);
+        res.json({
+          name: req.body.name,
+          email: req.body.email
+        })
+      }
+    })
+  })
+  .get((req,res) => {
+    var x = model[req.params.type];
+    x.find({}, (err, result) => {
+      if (err) console.log(err);
+      res.status(200);
+      res.send(result)
+    })
   })
 
 //////////////////////////// /api/:type/:id ////////////////////////////////
 
 router.route('/api/:type/:id')
-  .get((req, res) => {
-    db.collection(req.params.type)
-      .find({"_id": ObjectId("" + req.params.id)})
-      .toArray((err, results) => {
-        res
-          .status(200)
-          .send(results)
-      });
+  .get((req,res) => {
+    var x = model[req.params.type];
+    x.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
+      if (err) console.log(err);
+      res.status(200);
+      res.send(result)
     })
+  })
 
 /////////////////////// /api/:type/:id/editClasses ///////////////////////////
 
@@ -48,6 +60,14 @@ router.route('/api/students/:id/editClasses')
       {$set: { "classes": req.body.classes} }, 
       (err, results) => { res.status(200).send(results) }
     );
+  })
+  .put((req,res) => {
+    var x = model[req.params.type];
+    x.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
+      if (err) console.log(err);
+      res.status(200);
+      res.send(result)
+    })
   })
 
 module.exports = router;
