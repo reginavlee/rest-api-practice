@@ -11,63 +11,73 @@ const model = {
 }
 
 //////////////////////////// /api/:type ////////////////////////////////////
-
 router.route('/api/:type')
   .post((req, res) => {
-    let type = model[req.params.type];
-    let temp = new type(req.body);
-    temp.save((err, result)=> {
-      if (err) {
-        console.log(err);
-        res.status(404);
-        res.send(err);
-      } else {
-        res.status(201);
-        res.json({
-          name: req.body.name,
-          email: req.body.email
-        })
-      }
-    })
+    const type = model[req.params.type];
+    if(type){
+      const temp = new type(req.body);
+      temp.save((err, result)=> {
+        if (err) {
+          res.send(404);
+        } else {
+          res.status(201);
+          res.json({
+            name: req.body.name,
+            email: req.body.email
+          })
+        }
+      })
+    } else {
+      res.send(404);
+    }
   })
   .get((req,res) => {
-    var x = model[req.params.type];
-    x.find({}, (err, result) => {
-      if (err) console.log(err);
-      res.status(200);
-      res.send(result)
-    })
+    const type = model[req.params.type];
+    if(type){
+      type.find({}, (err, result) => {
+        if (err) console.log(err);
+        res.send(200, result);
+      })
+    } else {
+      res.send(404);
+    }
   })
 
 //////////////////////////// /api/:type/:id ////////////////////////////////
 
 router.route('/api/:type/:id')
   .get((req,res) => {
-    var x = model[req.params.type];
-    x.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
-      if (err) console.log(err);
-      res.status(200);
-      res.send(result)
-    })
+    const type = model[req.params.type];
+    if(type){
+      type.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
+        if (err) console.log(err);
+        res.send(200, result);
+      })
+    } else {
+      res.send(404);
+    }
   })
 
 /////////////////////// /api/:type/:id/editClasses ///////////////////////////
 
 router.route('/api/students/:id/editClasses')
-  .put((req, res) => {
-    db.collection('students').update(
-      {"_id": ObjectId("" + req.params.id)}, 
-      {$set: { "classes": req.body.classes} }, 
-      (err, results) => { res.status(200).send(results) }
-    );
-  })
+  // .put((req, res) => {
+  //   db.collection('students').update(
+  //     {"_id": ObjectId("" + req.params.id)}, 
+  //     {$set: { "classes": req.body.classes} }, 
+  //     (err, results) => { res.send(200, results) }
+  //   );
+  // })
   .put((req,res) => {
-    var x = model[req.params.type];
-    x.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
-      if (err) console.log(err);
-      res.status(200);
-      res.send(result)
-    })
+    const type = model[req.params.type];
+    if(type){
+      type.find({"_id": ObjectId("" + req.params.id)}, (err, result) => {
+        if (err) console.log(err);
+        res.send(200, result);
+      })
+    } else {
+      res.send(404);
+    }
   })
 
 module.exports = router;
