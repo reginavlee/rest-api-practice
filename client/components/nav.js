@@ -32,16 +32,13 @@ class NavBar extends Component {
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Add Entries</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <hr />
-
-            <h4>Test Form</h4>
             <SubmissionForm />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.postEntries("teachers", {name: 'patrick', email: 'patick@star.com'})} type="submit">Submit</Button>
+            <Button onClick={() => this.props.postEntries("teachers", {name: 'mr.krabs', email: 'krusty@krabs.com'})} type="submit">Submit</Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

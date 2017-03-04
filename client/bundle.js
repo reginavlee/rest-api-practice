@@ -17607,18 +17607,12 @@ var NavBar = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Modal.Title,
               null,
-              'Modal heading'
+              'Add Entries'
             )
           ),
           _react2.default.createElement(
             _reactBootstrap.Modal.Body,
             null,
-            _react2.default.createElement('hr', null),
-            _react2.default.createElement(
-              'h4',
-              null,
-              'Test Form'
-            ),
             _react2.default.createElement(_form2.default, null)
           ),
           _react2.default.createElement(
@@ -17627,7 +17621,7 @@ var NavBar = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Button,
               { onClick: function onClick() {
-                  return _this2.props.postEntries("teachers", { name: 'patrick', email: 'patick@star.com' });
+                  return _this2.props.postEntries("teachers", { name: 'mr.krabs', email: 'krusty@krabs.com' });
                 }, type: 'submit' },
               'Submit'
             ),
@@ -18518,17 +18512,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SubmissionForm = function SubmissionForm() {
   return _react2.default.createElement(
-    'div',
+    'form',
     null,
     _react2.default.createElement(
-      'div',
+      _reactBootstrap.FormGroup,
       null,
-      'Test'
+      'Name:',
+      _react2.default.createElement(_reactBootstrap.FormControl, {
+        id: 'formControlName',
+        type: 'text',
+        label: 'Name',
+        placeholder: 'Enter Name'
+      }),
+      'Email:',
+      _react2.default.createElement(_reactBootstrap.FormControl, {
+        id: 'formControlEmail',
+        type: 'text',
+        label: 'Email',
+        placeholder: 'Enter Email'
+      })
     )
   );
 };
 
 exports.default = SubmissionForm;
+
 // import React, { Component } from 'react';
 // import { FieldGroup } from 'react-bootstrap';
 

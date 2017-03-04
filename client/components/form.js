@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
-import { FieldGroup, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 
 const SubmissionForm = () => (
-  <div>
-    <div>Test</div>
-  </div>
+  <form>
+    <FormGroup>
+      Name:
+      <FormControl  
+        id="formControlName"
+        type="text"
+        label="Name"
+        placeholder="Enter Name"
+      />
+      Email:
+      <FormControl  
+        id="formControlEmail"
+        type="text"
+        label="Email"
+        placeholder="Enter Email"
+      />
+
+    </FormGroup>
+  </form>
 );
 
 export default SubmissionForm;
+
+
 // import React, { Component } from 'react';
 // import { FieldGroup } from 'react-bootstrap';
 
