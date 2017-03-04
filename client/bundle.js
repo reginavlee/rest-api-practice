@@ -17621,7 +17621,7 @@ var NavBar = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Button,
               { onClick: function onClick() {
-                  return _this2.props.postEntries("teachers", { name: 'mr.krabs', email: 'krusty@krabs.com' });
+                  return _this2.props.postEntries("teachers", {});
                 }, type: 'submit' },
               'Submit'
             ),
@@ -18514,6 +18514,24 @@ var SubmissionForm = function SubmissionForm() {
   return _react2.default.createElement(
     'form',
     null,
+    _react2.default.createElement(
+      _reactBootstrap.FormGroup,
+      null,
+      _react2.default.createElement(
+        _reactBootstrap.FormControl,
+        { componentClass: 'select', placeholder: 'select' },
+        _react2.default.createElement(
+          'option',
+          { value: 'teachers' },
+          'Teacher'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'students' },
+          'Student'
+        )
+      )
+    ),
     _react2.default.createElement(
       _reactBootstrap.FormGroup,
       null,
@@ -41783,7 +41801,7 @@ var App = function (_Component) {
   }, {
     key: 'postEntries',
     value: function postEntries(endpoint, data) {
-      var basePath = "http://localhost:8080/api/";
+      var basePath = "http://localhost:8080/api/teachers";
       _axios2.default.post(basePath + endpoint, data).then(function (response) {
         console.log(response);
       }).catch(function (err) {

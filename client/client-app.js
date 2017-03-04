@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   postEntries (endpoint, data) {
-    const basePath = "http://localhost:8080/api/" 
+    const basePath = "http://localhost:8080/api/teachers" 
     axios
       .post(basePath + endpoint, data)    
       .then((response) => {

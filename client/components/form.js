@@ -4,6 +4,12 @@ import { FormGroup, FormControl, Button } from 'react-bootstrap';
 const SubmissionForm = () => (
   <form>
     <FormGroup>
+      <FormControl componentClass="select" placeholder="select">
+        <option value="teachers">Teacher</option>
+        <option value="students">Student</option>        
+      </FormControl>
+    </FormGroup>
+    <FormGroup>
       Name:
       <FormControl  
         id="formControlName"

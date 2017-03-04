@@ -38,7 +38,7 @@ class NavBar extends Component {
             <SubmissionForm />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.postEntries("teachers", {name: 'mr.krabs', email: 'krusty@krabs.com'})} type="submit">Submit</Button>
+            <Button onClick={() => this.props.postEntries("teachers", {})} type="submit">Submit</Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
