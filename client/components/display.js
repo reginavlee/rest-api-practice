@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Display = ({info}) => (
+const Display = ({resultData}) => (
   <table className="table">
     <thead>
       <tr>
@@ -10,7 +10,7 @@ const Display = ({info}) => (
       </tr>
     </thead>
     <tbody>
-      {info.map((entry, i)=> (
+      {resultData.map((entry, i)=> (
         <tr key={i}>
           <td>{entry._id}</td>
           <td>{entry.name}</td>

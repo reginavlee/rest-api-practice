@@ -10,20 +10,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      click: false,
-      data: []
+      resultsData: []
     }
-    this.buttonClicked = this.buttonClicked.bind(this);
+    this.getEntries = this.getEntries.bind(this);
   }
 
-  buttonClicked (type) {
+  getEntries (type) {
     const basePath = "http://localhost:8080/api/" 
     axios
       .get(basePath + type)
       .then((results) => {
         this.setState({
-          click: true,
-          data: results.data
+          resultsData: results.data
         });
       })
       .catch((error) => {
@@ -34,8 +32,8 @@ class App extends Component {
   render() {
     return(
       <div>
-        <NavBar buttonClicked={this.buttonClicked}/>
-        <Display info={this.state.data}/>
+        <NavBar getEntries={this.getEntries}/>
+        <Display resultData={this.state.resultsData}/>
       </div>
     );
   }
