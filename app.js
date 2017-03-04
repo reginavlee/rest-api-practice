@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const router = require('./controller/controller.js');
 const bodyParser = require('body-parser');
 
@@ -10,6 +11,8 @@ const port = process.env.PORT || 8080;
 // middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 app.use('/', router);
 
 app.listen(port, 'localhost', () => {
