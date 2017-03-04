@@ -10134,41 +10134,58 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Display = function Display(_ref) {
   var info = _ref.info;
   return _react2.default.createElement(
-    'table',
-    null,
+    "table",
+    { className: "table" },
     _react2.default.createElement(
-      'tbody',
+      "thead",
       null,
       _react2.default.createElement(
-        'tr',
+        "tr",
         null,
         _react2.default.createElement(
-          'td',
+          "th",
           null,
-          info[0]
+          "ID"
         ),
         _react2.default.createElement(
-          'td',
+          "th",
           null,
-          info[1]
+          "Name"
+        ),
+        _react2.default.createElement(
+          "th",
+          null,
+          "Email"
         )
       )
+    ),
+    _react2.default.createElement(
+      "tbody",
+      null,
+      info.map(function (entry, i) {
+        return _react2.default.createElement(
+          "tr",
+          { key: i },
+          _react2.default.createElement(
+            "td",
+            null,
+            entry._id
+          ),
+          _react2.default.createElement(
+            "td",
+            null,
+            entry.name
+          ),
+          _react2.default.createElement(
+            "td",
+            null,
+            entry.email
+          )
+        );
+      })
     )
   );
 };
-// const Display = ({info}) => (
-//   <table>
-//     <tbody>
-//       {info.length ? info.map((item) => {
-//         <tr>
-//           <td>{console.log(item)}</td>
-//           <td>{item.email}</td>
-//         </tr>
-//       }) : "" }
-//     </tbody>
-//   </table>
-// );
-
 
 exports.default = Display;
 
@@ -10197,21 +10214,21 @@ var NavBar = function NavBar(_ref) {
     _react2.default.createElement(
       "button",
       { onClick: function onClick() {
-          return buttonClicked();
+          return buttonClicked("teachers");
         }, className: "btn btn-primary" },
       "Teachers"
     ),
     _react2.default.createElement(
       "button",
       { onClick: function onClick() {
-          return buttonClicked();
+          return buttonClicked("students");
         }, className: "btn btn-default" },
       "Students"
     ),
     _react2.default.createElement(
       "button",
       { onClick: function onClick() {
-          return buttonClicked();
+          return buttonClicked("classes");
         }, className: "btn btn-primary" },
       "Classes"
     )
@@ -23340,7 +23357,7 @@ var App = function (_Component) {
 
     _this.state = {
       click: false,
-      data: ['testing', '123']
+      data: []
     };
     _this.buttonClicked = _this.buttonClicked.bind(_this);
     return _this;
@@ -23348,11 +23365,11 @@ var App = function (_Component) {
 
   _createClass(App, [{
     key: 'buttonClicked',
-    value: function buttonClicked() {
+    value: function buttonClicked(type) {
       var _this2 = this;
 
-      console.log("i'm clicked!");
-      _axios2.default.get("http://localhost:8080/api/teachers").then(function (results) {
+      var basePath = "http://localhost:8080/api/";
+      _axios2.default.get(basePath + type).then(function (results) {
         _this2.setState({
           click: true,
           data: results.data
@@ -23368,12 +23385,7 @@ var App = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_nav2.default, { buttonClicked: this.buttonClicked }),
-        _react2.default.createElement(_display2.default, { info: this.state.data }),
-        _react2.default.createElement(
-          'h2',
-          null,
-          'testing'
-        )
+        _react2.default.createElement(_display2.default, { info: this.state.data })
       );
     }
   }]);

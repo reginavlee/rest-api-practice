@@ -11,15 +11,15 @@ class App extends Component {
     super(props);
     this.state = {
       click: false,
-      data: ['testing', '123']
+      data: []
     }
     this.buttonClicked = this.buttonClicked.bind(this);
   }
 
-  buttonClicked () {
-    console.log("i'm clicked!");
+  buttonClicked (type) {
+    const basePath = "http://localhost:8080/api/" 
     axios
-      .get("http://localhost:8080/api/teachers")
+      .get(basePath + type)
       .then((results) => {
         this.setState({
           click: true,
@@ -36,7 +36,6 @@ class App extends Component {
       <div>
         <NavBar buttonClicked={this.buttonClicked}/>
         <Display info={this.state.data}/>
-        <h2>testing</h2>
       </div>
     );
   }

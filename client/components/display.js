@@ -1,28 +1,24 @@
 import React from 'react';
 
 const Display = ({info}) => (
-  <table>
-    <tbody>
-      {}
+  <table className="table">
+    <thead>
       <tr>
-        <td>{info[0]}</td>
-        <td>{info[1]}</td>        
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
       </tr>
+    </thead>
+    <tbody>
+      {info.map((entry, i)=> (
+        <tr key={i}>
+          <td>{entry._id}</td>
+          <td>{entry.name}</td>
+          <td>{entry.email}</td>    
+        </tr>
+      ))}
     </tbody>
   </table>
 );
-// const Display = ({info}) => (
-//   <table>
-//     <tbody>
-//       {info.length ? info.map((item) => {
-//         <tr>
-//           <td>{console.log(item)}</td>
-//           <td>{item.email}</td>
-//         </tr>
-//       }) : "" }
-//     </tbody>
-//   </table>
-// );
-
 
 export default Display;
