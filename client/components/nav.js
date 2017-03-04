@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import SubmitModal from './submit-modal';
 import { Button, Modal } from 'react-bootstrap';
 
+import SubmissionForm from './form';
 
 class NavBar extends Component {
   constructor(props) {
@@ -9,6 +9,8 @@ class NavBar extends Component {
     this.state = {
       showModal: false
     }
+
+    // function binds
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
   }
@@ -36,9 +38,10 @@ class NavBar extends Component {
             <hr />
 
             <h4>Test Form</h4>
-            <p>Here you would submit information</p>
+            <SubmissionForm />
           </Modal.Body>
           <Modal.Footer>
+            <Button onClick={() => this.props.postEntries("teachers", {name: 'patrick', email: 'patick@star.com'})} type="submit">Submit</Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

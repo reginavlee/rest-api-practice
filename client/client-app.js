@@ -13,12 +13,13 @@ class App extends Component {
       resultsData: []
     }
     this.getEntries = this.getEntries.bind(this);
+    this.postEntries = this.postEntries.bind(this);
   }
 
-  getEntries (type) {
+  getEntries (endpoint) {
     const basePath = "http://localhost:8080/api/" 
     axios
-      .get(basePath + type)
+      .get(basePath + endpoint)
       .then((results) => {
         this.setState({
           resultsData: results.data
@@ -29,11 +30,23 @@ class App extends Component {
       });
   }
 
+  postEntries (endpoint, data) {
+    const basePath = "http://localhost:8080/api/" 
+    axios
+      .post(basePath + endpoint, data)    
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(response);
+      })
+  }
+
   render() {
     return(
       <div>
-        <NavBar getEntries={this.getEntries}/>
-        <Display resultData={this.state.resultsData}/>
+        <NavBar getEntries={this.getEntries} postEntries={this.postEntries}/>
+        <Display resultData={this.state.resultsData} />
       </div>
     );
   }
