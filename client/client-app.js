@@ -10,7 +10,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      click: [],
+      click: false,
+      data: ['testing', '123']
     }
     this.buttonClicked = this.buttonClicked.bind(this);
   }
@@ -21,20 +22,20 @@ class App extends Component {
       .get("http://localhost:8080/api/teachers")
       .then((results) => {
         this.setState({
-          click: results.data
+          click: true,
+          data: results.data
         });
       })
       .catch((error) => {
         console.error(error);
       });
-
   }
 
   render() {
     return(
       <div>
         <NavBar buttonClicked={this.buttonClicked}/>
-        <Display info={this.state.click}/>
+        <Display info={this.state.data}/>
         <h2>testing</h2>
       </div>
     );

@@ -10134,24 +10134,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Display = function Display(_ref) {
   var info = _ref.info;
   return _react2.default.createElement(
-    'div',
+    'table',
     null,
-    console.log('info', info[0]),
     _react2.default.createElement(
-      'table',
+      'tbody',
       null,
       _react2.default.createElement(
-        'tbody',
+        'tr',
         null,
         _react2.default.createElement(
-          'tr',
+          'td',
           null,
-          info[0].name
+          info[0]
+        ),
+        _react2.default.createElement(
+          'td',
+          null,
+          info[1]
         )
       )
     )
   );
 };
+// const Display = ({info}) => (
+//   <table>
+//     <tbody>
+//       {info.length ? info.map((item) => {
+//         <tr>
+//           <td>{console.log(item)}</td>
+//           <td>{item.email}</td>
+//         </tr>
+//       }) : "" }
+//     </tbody>
+//   </table>
+// );
+
 
 exports.default = Display;
 
@@ -23322,7 +23339,8 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      click: []
+      click: false,
+      data: ['testing', '123']
     };
     _this.buttonClicked = _this.buttonClicked.bind(_this);
     return _this;
@@ -23336,7 +23354,8 @@ var App = function (_Component) {
       console.log("i'm clicked!");
       _axios2.default.get("http://localhost:8080/api/teachers").then(function (results) {
         _this2.setState({
-          click: results.data
+          click: true,
+          data: results.data
         });
       }).catch(function (error) {
         console.error(error);
@@ -23349,7 +23368,7 @@ var App = function (_Component) {
         'div',
         null,
         _react2.default.createElement(_nav2.default, { buttonClicked: this.buttonClicked }),
-        _react2.default.createElement(_display2.default, { info: this.state.click }),
+        _react2.default.createElement(_display2.default, { info: this.state.data }),
         _react2.default.createElement(
           'h2',
           null,
