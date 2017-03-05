@@ -17641,21 +17641,6 @@ var NavBar = function (_Component) {
 
 exports.default = NavBar;
 
-// import React from 'react';
-// import SubmitModal from './submit-modal';
-
-// const NavBar = ({ getEntries }) => (
-//   <nav className="navbar navbar-default text-center">
-//     <button onClick={()=>getEntries("teachers")} className="btn btn-primary">Teachers</button>
-//     <button onClick={()=>getEntries("students")} className="btn btn-default">Students</button>
-//     <button onClick={()=>getEntries("classes")} className="btn btn-primary">Classes</button>
-//     <button onClick={()=>{console.log("inside of submit modal")}} className="btn btn-secondary">Add Entries</button>
-//   </nav>
-// );
-
-
-// export default NavBar;
-
 /***/ }),
 /* 209 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18554,22 +18539,6 @@ var SubmissionForm = function SubmissionForm() {
 };
 
 exports.default = SubmissionForm;
-
-// import React, { Component } from 'react';
-// import { FieldGroup } from 'react-bootstrap';
-
-// const SubmissionForm = () => (
-//   <form>
-//     <FieldGroup
-//       id="formControlName"
-//       type="text"
-//       label="Name"
-//       placeholder="Enter Name"
-//     />
-//   </form>
-// );
-
-// export default SubmissionForm;
 
 /***/ }),
 /* 227 */
@@ -41801,11 +41770,12 @@ var App = function (_Component) {
   }, {
     key: 'postEntries',
     value: function postEntries(endpoint, data) {
+      console.log("entered post entries");
       var basePath = "http://localhost:8080/api/teachers";
       _axios2.default.post(basePath + endpoint, data).then(function (response) {
-        console.log(response);
+        console.log('successful response in post entries', response);
       }).catch(function (err) {
-        console.log(response);
+        console.log('error in post entries', response);
       });
     }
   }, {

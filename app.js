@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080;
 // middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(express.static('client'));
 
 app.use('/', router);
 

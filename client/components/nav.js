@@ -22,6 +22,11 @@ class NavBar extends Component {
   open() {
     this.setState({ showModal: true });
   }
+
+  getUserData(data) {
+    
+  }
+
   render() {
     return (
       <nav className="navbar navbar-default text-center">
@@ -49,19 +54,3 @@ class NavBar extends Component {
 
 
 export default NavBar;
-
-
-// import React from 'react';
-// import SubmitModal from './submit-modal';
-
-// const NavBar = ({ getEntries }) => (
-//   <nav className="navbar navbar-default text-center">
-//     <button onClick={()=>getEntries("teachers")} className="btn btn-primary">Teachers</button>
-//     <button onClick={()=>getEntries("students")} className="btn btn-default">Students</button>
-//     <button onClick={()=>getEntries("classes")} className="btn btn-primary">Classes</button>
-//     <button onClick={()=>{console.log("inside of submit modal")}} className="btn btn-secondary">Add Entries</button>
-//   </nav>
-// );
-
-
-// export default NavBar;

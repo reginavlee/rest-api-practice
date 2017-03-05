@@ -31,14 +31,15 @@ class App extends Component {
   }
 
   postEntries (endpoint, data) {
+    console.log("entered post entries");
     const basePath = "http://localhost:8080/api/teachers" 
     axios
       .post(basePath + endpoint, data)    
       .then((response) => {
-        console.log(response);
+        console.log('successful response in post entries', response);
       })
       .catch((err) => {
-        console.log(response);
+        console.log('error in post entries', response);
       })
   }
 
