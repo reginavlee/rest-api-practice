@@ -21,4 +21,5 @@ const Display = ({resultData}) => (
   </table>
 );
 
+
 export default Display;
