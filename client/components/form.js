@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
 
-const userData = {};
-
 class SubmissionForm extends Component {
-  getUserData() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      value: ''
+    }
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleEmailSubmit = this.handleEmailSubmit.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+  }
 
+  handleNameChange(event) {
+    this.setState({ name: event.target.value })    
+  }
+
+  handleEmailSubmit(event) {
+    this.setState({ email: event.target.value })
+  }
+
+  handleSelectChange(event) {
+    console.log('event', event);
+    this.setState({ value: event.target.value })
   }
 
   render() {
     return(
-      <form>
+      <form onKeyUp={() => this.props.getUserData(this.state)}>  
         <FormGroup>
-          <FormControl componentClass="select" placeholder="select">
+          <FormControl componentClass="select" placeholder="select" value={this.state.value} onChange={this.handleSelectChange}>
             <option value="teachers">Teacher</option>
-            <option value="students">Student</option>        
+            <option value="students">Student</option>
           </FormControl>
         </FormGroup>
         <FormGroup>
@@ -24,7 +43,8 @@ class SubmissionForm extends Component {
             type="text"
             label="Name"
             placeholder="Enter Name"
-            value=""
+            value={this.state.name}
+            onChange={this.handleNameChange}
           />
           Email:
           <FormControl  
@@ -32,9 +52,9 @@ class SubmissionForm extends Component {
             type="text"
             label="Email"
             placeholder="Enter Email"
-            value=""
+            value={this.state.email}
+            onChange={this.handleEmailSubmit}            
           />
-
         </FormGroup>
       </form>
     )

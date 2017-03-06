@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import axios from 'axios';
 
 import SubmissionForm from './form';
 
@@ -7,12 +8,15 @@ class NavBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false
+      showModal: false,
+      userData: {}
     }
 
     // function binds
     this.close = this.close.bind(this);
     this.open = this.open.bind(this);
+    this.postEntries = this.postEntries.bind(this);
+    this.getUserData = this.getUserData.bind(this);
   }
 
   close() {
@@ -23,8 +27,20 @@ class NavBar extends Component {
     this.setState({ showModal: true });
   }
 
-  getUserData(data) {
-    
+  getUserData(incomingData) {
+    this.setState({ userData: incomingData });
+  }
+
+  postEntries (endpoint, data) {
+    const basePath = "http://localhost:8080/api/" 
+    axios
+      .post(basePath+endpoint, data)    
+      .then((response) => {
+        console.log('successful response in post entries', response);
+      })
+      .catch((err) => {
+        console.log('error in post entries', response);
+      })
   }
 
   render() {
@@ -40,10 +56,10 @@ class NavBar extends Component {
             <Modal.Title>Add Entries</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SubmissionForm />
+            <SubmissionForm getUserData={this.getUserData} />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => this.props.postEntries("teachers", {})} type="submit">Submit</Button>
+            <Button onClick={()=> this.postEntries(this.state.userData.value, {"name": this.state.userData.name, "email": this.state.userData.email})} type="submit">Submit</Button>
             <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>

@@ -14,7 +14,6 @@ const model = {
 
 router.route('/api/:type')
   .post((req, res) => {
-    console.log(req);
     const type = model[req.params.type];
     if(type){
       const temp = new type(req.body);

@@ -18,5 +18,3 @@ app.use('/', router);
 app.listen(port, 'localhost', () => {
   console.log("We are listening on: ", port);
 })
-
-

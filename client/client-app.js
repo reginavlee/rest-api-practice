@@ -13,7 +13,6 @@ class App extends Component {
       resultsData: []
     }
     this.getEntries = this.getEntries.bind(this);
-    this.postEntries = this.postEntries.bind(this);
   }
 
   getEntries (endpoint) {
@@ -30,23 +29,10 @@ class App extends Component {
       });
   }
 
-  postEntries (endpoint, data) {
-    console.log("entered post entries");
-    const basePath = "http://localhost:8080/api/teachers" 
-    axios
-      .post(basePath + endpoint, data)    
-      .then((response) => {
-        console.log('successful response in post entries', response);
-      })
-      .catch((err) => {
-        console.log('error in post entries', response);
-      })
-  }
-
   render() {
     return(
       <div>
-        <NavBar getEntries={this.getEntries} postEntries={this.postEntries}/>
+        <NavBar getEntries={this.getEntries} />
         <Display resultData={this.state.resultsData} />
       </div>
     );
